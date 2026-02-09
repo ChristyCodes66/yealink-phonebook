@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<YealinkIPPhoneBook>
+  <Title>Company Phonebook</Title>
+  <Directory>
+    <Entry>
+      <Name>Jane Doe (Example GmbH)</Name>
+      <Telephone>030123456</Telephone>
+    </Entry>
+    <Entry>
+      <Name>Max Mustermann (Demo AG)</Name>
+      <Telephone>030987654</Telephone>
+    </Entry>
+    <Entry>
+      <Name>Support Hotline (Example GmbH)</Name>
+      <Telephone>030111222</Telephone>
+    </Entry>
+    <Entry>
+      <Name>Jean Claude (Unterwegs GmbH)</Name>
+      <Telephone>01765711144</Telephone>
+    </Entry>
+  </Directory>
+</YealinkIPPhoneBook>
