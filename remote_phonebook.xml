@@ -1,22 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<YealinkIPPhoneBook>
-  <Title>Company Phonebook</Title>
-  <Directory>
-    <Entry>
-      <Name>Jane Doe (Example GmbH)</Name>
-      <Telephone>030123456</Telephone>
-    </Entry>
-    <Entry>
-      <Name>Max Mustermann (Demo AG)</Name>
-      <Telephone>030987654</Telephone>
-    </Entry>
-    <Entry>
-      <Name>Support Hotline (Example GmbH)</Name>
-      <Telephone>030111222</Telephone>
-    </Entry>
-    <Entry>
-      <Name>Jean Claude (Unterwegs GmbH)</Name>
-      <Telephone>01765711144</Telephone>
-    </Entry>
-  </Directory>
-</YealinkIPPhoneBook>
+<root_contact>
+  <contact display_name="Jane Doe (Example GmbH)" office_number="030123456" mobile_number="01521768150" other_number="08005566221"/>
+  <contact display_name="Max Mustermann (Demo AG)" office_number="030987654" mobile_number="" other_number="08003939440"/>
+  <contact display_name="Support Hotline (Example GmbH)" office_number="030111222" mobile_number="01755882300" other_number=""/>
+  <contact display_name="Jean Claude (Unterwegs GmbH)" office_number="0305544667" mobile_number="" other_number=""/>
+</root_contact>

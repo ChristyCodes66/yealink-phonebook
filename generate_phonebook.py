@@ -1,43 +1,59 @@
 import pandas as pd
 from lxml import etree
 
-COLUMN_MAP = {
-    "Name": "Name",
-    "Company": "Firma",    # only used for concatentation, not XML tag
-    "Telephone": "Telefon"
-}
+CSV_FILE = "contacts_test.csv"
+OUTPUT_XML = "remote_phonebook.xml"
+
+# COLUMN_MAP = {
+#     "Name": "Name",
+#     "Company": "Firma",    # only used for concatentation, not XML tag
+#     "Telephone": "Telefon"
+# }
 
 # Read CSV (change sep to "," if needed) and force columns as strings
 df = pd.read_csv(
-    "contacts_test.csv",
+    CSV_FILE,
     sep=";",
-    encoding="utf-8",
-    dtype={"Name": str, "Firma": str, "Telefon": str}  # force text
+    dtype=str,
+    keep_default_na=False   # prevents "nan"
 )
 
 # shows first few rows
-print("Number of rows read:", len(df))
+print(f"Rows read: {len(df)}")
 print(df.head()) 
 
-root = etree.Element("YealinkIPPhoneBook")
-title = etree.SubElement(root, "Title")
-title.text = "Company Phonebook"
+root = etree.Element("root_contact")
 
-directory = etree.SubElement(root, "Directory")
+for index, row in df.iterrows():
+    # --- Mandatory Fields ---
+    display_name = row["DisplayName"].strip()
+    office_number = row["OfficeNumber"].strip()
 
-for _, row in df.iterrows():
-    entry = etree.SubElement(directory, "Entry")
+    if not display_name or not office_number:
+        print(f"Skipping row {index + 1}: missing DisplayName or OfficeNumber")
+        continue
 
-    # Combine Name + Company in a single <Name> tag
-    full_name = f"{row[COLUMN_MAP["Name"]]} ({row[COLUMN_MAP["Company"]]})"
-    etree.SubElement(entry, "Name").text = full_name
+    # --- Optional Fields ---
+    company = row["Company"].strip()
+    mobile = row["MobileNumber"].strip()
+    other = row["OtherNumber"].strip()
 
-    # Telephone Number
-    etree.SubElement(entry, "Telephone").text = row[COLUMN_MAP["Telephone"]]
-    
+    # --- Concat company into display name ---
+    if company:
+        display_name = f"{display_name} ({company})"
+
+    etree.SubElement(
+        root,
+        "contact", 
+        display_name = display_name,
+        office_number = office_number,
+        mobile_number = mobile,
+        other_number = other
+    )
+
 tree = etree.ElementTree(root)
 tree.write(
-    "remote_phonebook.xml",
+    OUTPUT_XML,
     pretty_print=True,
     xml_declaration=True,
     encoding="UTF-8"
